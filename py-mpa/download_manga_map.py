@@ -62,8 +62,8 @@ def download_maps(dapall='?', save_dir='?',
                             shutil.copyfileobj(r.raw, f)
 
 
-dapall_dir = './dapall-v3_1_1-3.1.0_spx.fits'
-save_dir = './'
+dapall_dir = '/afs/mpa/home/gxjin/gxjin_mpa/dapall-v3_1_1-3.1.0_spx.fits'
+save_dir = '/afs/mpa/temp/gxjin/DAP11_MAPS_SPX'
 download_maps(dapall=dapall_dir, save_dir=save_dir, daptype='SPX', test=False)
 
 # todo: check how many files, etc.
