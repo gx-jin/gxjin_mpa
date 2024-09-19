@@ -24,43 +24,43 @@ from astropy.io import fits
 from tqdm import tqdm
 
 
-def download_logcube(dapall='?', save_dir='?', daptype='SPX', test=False):
-    if not os.path.exists(dapall):
-        raise RuntimeError("No such directory: " + str(dapall))
-    elif not os.path.exists(save_dir):
-        raise RuntimeError("No such directory: " + str(save_dir))
-    elif not test:
-        hdu = fits.open(dapall)
-        plate = hdu[1].data['PLATE']
-        ifu = hdu[1].data['IFUDESIGN']
-        save_loc = f'{save_dir}/manga-{plate[1]}-{ifu[1]}-LOGCUBE-{daptype}-MILESHC-MASTARSSP.fits.gz'
-        maps_url = f'https://data.sdss.org/sas/dr17/manga/spectro/analysis/v3_1_1/3.1.0/{daptype}-MILESHC-MASTARSSP/{plate[1]}/{ifu[1]}/manga-{plate[1]}-{ifu[1]}-LOGCUBE-{daptype}-MILESHC-MASTARSSP.fits.gz'
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; \
-                rv:80.0) Gecko/20100101 Firefox/80.0'}
-        with requests.get(maps_url, headers=headers, stream=True) as r:
-            if r.status_code == requests.codes.ok:
-                with open(save_loc, 'wb') as f:
-                    shutil.copyfileobj(r.raw, f)
-    else:
-        hdu = fits.open(dapall)
-        plate = hdu[1].data['PLATE']
-        ifu = hdu[1].data['IFUDESIGN']
-        for i in tqdm(range(len(plate))):  
-            save_loc = f'{save_dir}/manga-{plate[i]}-{ifu[i]}-LOGCUBE-{daptype}-MILESHC-MASTARSSP.fits.gz'
-            if os.path.exists(save_loc):
-                continue
-            else:
-                maps_url = f'https://data.sdss.org/sas/dr17/manga/spectro/analysis/v3_1_1/3.1.0/{daptype}-MILESHC-MASTARSSP/{plate[i]}/{ifu[i]}/manga-{plate[i]}-{ifu[i]}-LOGCUBE-{daptype}-MILESHC-MASTARSSP.fits.gz'
-                headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; \
-                    rv:80.0) Gecko/20100101 Firefox/80.0'}
-                with requests.get(maps_url, headers=headers, stream=True) as r:
-                    if r.status_code == requests.codes.ok:
-                        with open(save_loc, 'wb') as f:
-                            shutil.copyfileobj(r.raw, f)
+# def download_logcube(dapall='?', save_dir='?', daptype='SPX', test=False):
+#     if not os.path.exists(dapall):
+#         raise RuntimeError("No such directory: " + str(dapall))
+#     elif not os.path.exists(save_dir):
+#         raise RuntimeError("No such directory: " + str(save_dir))
+#     elif not test:
+#         hdu = fits.open(dapall)
+#         plate = hdu[1].data['PLATE']
+#         ifu = hdu[1].data['IFUDESIGN']
+#         save_loc = f'{save_dir}/manga-{plate[1]}-{ifu[1]}-LOGCUBE-{daptype}-MILESHC-MASTARSSP.fits.gz'
+#         maps_url = f'https://data.sdss.org/sas/dr17/manga/spectro/analysis/v3_1_1/3.1.0/{daptype}-MILESHC-MASTARSSP/{plate[1]}/{ifu[1]}/manga-{plate[1]}-{ifu[1]}-LOGCUBE-{daptype}-MILESHC-MASTARSSP.fits.gz'
+#         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; \
+#                 rv:80.0) Gecko/20100101 Firefox/80.0'}
+#         with requests.get(maps_url, headers=headers, stream=True) as r:
+#             if r.status_code == requests.codes.ok:
+#                 with open(save_loc, 'wb') as f:
+#                     shutil.copyfileobj(r.raw, f)
+#     else:
+#         hdu = fits.open(dapall)
+#         plate = hdu[1].data['PLATE']
+#         ifu = hdu[1].data['IFUDESIGN']
+#         for i in tqdm(range(len(plate))):  
+#             save_loc = f'{save_dir}/manga-{plate[i]}-{ifu[i]}-LOGCUBE-{daptype}-MILESHC-MASTARSSP.fits.gz'
+#             if os.path.exists(save_loc):
+#                 continue
+#             else:
+#                 maps_url = f'https://data.sdss.org/sas/dr17/manga/spectro/analysis/v3_1_1/3.1.0/{daptype}-MILESHC-MASTARSSP/{plate[i]}/{ifu[i]}/manga-{plate[i]}-{ifu[i]}-LOGCUBE-{daptype}-MILESHC-MASTARSSP.fits.gz'
+#                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; \
+#                     rv:80.0) Gecko/20100101 Firefox/80.0'}
+#                 with requests.get(maps_url, headers=headers, stream=True) as r:
+#                     if r.status_code == requests.codes.ok:
+#                         with open(save_loc, 'wb') as f:
+#                             shutil.copyfileobj(r.raw, f)
 
 
-dapall_dir = '../dap'
-save_dir = './'
-download_logcube(dapall=dapall_dir, save_dir=save_dir, daptype='SPX', test=True)
+# dapall_dir = '../dap'
+# save_dir = './'
+# download_logcube(dapall=dapall_dir, save_dir=save_dir, daptype='SPX', test=True)
 
-# todo: check how many files, etc.
+# # todo: check how many files, etc.
